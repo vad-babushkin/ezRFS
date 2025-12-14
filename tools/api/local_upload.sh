@@ -1,0 +1,1 @@
+curl -vvv -X POST -F "file=@$1" -F "description=file upload"  http://localhost:8081/api/v1/upload

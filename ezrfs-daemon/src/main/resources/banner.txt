@@ -1,0 +1,5 @@
+${AnsiColor.BRIGHT_MAGENTA} ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+${AnsiColor.BRIGHT_GREEN}           EASY REMOTE FILE STORAGE
+${AnsiColor.BRIGHT_MAGENTA} ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+${AnsiColor.BRIGHT_MAGENTA}${application.title}/${application.version}
+${AnsiColor.BRIGHT_MAGENTA}Powered by Spring Boot ${spring-boot.version}

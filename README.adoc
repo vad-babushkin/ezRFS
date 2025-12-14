@@ -1,0 +1,8 @@
+= Easy remote file storage (ezRFS)
+
+Extremely simple remote file storage.
+
+It is used for short-term storage of a file in a weak cloud VPS and accessible from the Internet.
+
+- There is no database, everything is stored in the file system (easy local file storage (ezlfs) library)
+- 2 operations: POST and GET
