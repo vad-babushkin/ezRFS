@@ -6,3 +6,5 @@ It is used for short-term storage of a file in a weak cloud VPS and accessible f
 
 - There is no database, everything is stored in the file system (easy local file storage (ezlfs) library)
 - 2 operations: POST and GET
+- without authorization (I'll probably do it by POST)
+- files are automatically deleted by cron via linux find & rm
