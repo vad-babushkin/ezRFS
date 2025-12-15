@@ -1,8 +1,10 @@
 package com.iconiux.ezrfs.daemon.service;
 
+import com.google.common.cache.LoadingCache;
 import com.iconiux.ezlfs.model.FileMetadata;
 import com.iconiux.ezlfs.service.IFileStorage;
 import com.iconiux.ezlfs.util.EzHashUtils;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,23 +16,24 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URLEncoder;
 import java.nio.file.Path;
+import java.util.concurrent.locks.ReentrantLock;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
-import static org.springframework.http.HttpHeaders.CONTENT_DISPOSITION;
 
 @Service
 @Slf4j
 public class TFileService {
 	@Autowired
 	private IFileStorage storageService;
+	@Autowired
+	private LoadingCache<String, ReentrantLock> fileHashCache;
 
 	/**
 	 * @param file .
@@ -39,25 +42,29 @@ public class TFileService {
 	public ResponseEntity<String> uploadFile(MultipartFile file) {
 		String fileName = file.getName();
 		try {
-			String hash = EzHashUtils.mzHash(file.getBytes());
+			String hash = EzHashUtils.ezHash(file.getBytes());
 
-			FileMetadata fileMetadata = new FileMetadata();
-			fileMetadata.setFileHash(hash);
-			fileMetadata.setOriginalFileName(file.getOriginalFilename());
-			fileMetadata.setFileName(fileName);
-			fileMetadata.setFileContentType(file.getContentType());
-			fileMetadata.setFileContentLength(file.getSize());
-			fileMetadata.setFileExt(FilenameUtils.getExtension(file.getOriginalFilename()));
-			String fileHash = storageService.saveFile(fileMetadata, file.getBytes());
+			ReentrantLock lock = fileHashCache.getUnchecked(hash);
+			lock.lock();
+			try {
+				FileMetadata fileMetadata = new FileMetadata();
+				fileMetadata.setFileHash(hash);
+				fileMetadata.setOriginalFileName(file.getOriginalFilename());
+				fileMetadata.setFileName(fileName);
+				fileMetadata.setFileContentType(file.getContentType());
+				fileMetadata.setFileContentLength(file.getSize());
+				fileMetadata.setFileExt(FilenameUtils.getExtension(file.getOriginalFilename()));
+				String fileHash = storageService.saveFile(fileMetadata, file.getBytes());
+				String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+						.path("/api/v1/download/")
+						.path(fileHash)
+						.toUriString();
 
-			String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-				.path("/api/v1/download/")
-				.path(fileHash)
-				.toUriString();
-
-			log.info("Successfully uploaded file: {}", fileDownloadUri);
-			return ResponseEntity.ok(fileDownloadUri);
-
+				log.info("Successfully uploaded file: {}", fileDownloadUri);
+				return ResponseEntity.ok(fileDownloadUri);
+			} finally {
+				lock.unlock();
+			}
 		} catch (IOException ex) {
 			log.error("Could not store file {}. Please try again!", fileName, ex);
 			return ResponseEntity.internalServerError().body("Could not store file " + fileName + ". Please try again!");

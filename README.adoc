@@ -4,7 +4,18 @@ Extremely simple remote file storage.
 
 It is used for short-term storage of a file in a weak cloud VPS and accessible from the Internet.
 
-- There is no database, everything is stored in the file system (easy local file storage (ezlfs) library)
+- include "easy local file storage (ezlfs) library"
+
+- There is no database, everything is stored in the file system
+
 - 2 operations: POST and GET
-- without authorization (I'll probably do it by POST)
+
+- GET without authorization
+
+- POST Basic Authorization + lock aware
+
+- GraalVM native aware
+
+- JRE 8-24 verify (depends spring boot version)
+
 - files are automatically deleted by cron via linux find & rm

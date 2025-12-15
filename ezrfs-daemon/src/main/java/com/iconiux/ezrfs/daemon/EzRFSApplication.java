@@ -1,12 +1,12 @@
 package com.iconiux.ezrfs.daemon;
 
+import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
-import javax.annotation.PostConstruct;
 
 @SpringBootApplication(scanBasePackages = {"com.iconiux.ezrfs.daemon"})
 @EntityScan(basePackages = "com.iconiux.ezrfs.daemon.entity")

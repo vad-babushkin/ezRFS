@@ -6,14 +6,14 @@
 
     <groupId>com.iconiux</groupId>
     <artifactId>ezrfs-daemon</artifactId>
-    <version>251214.0.6</version>
+    <version>251215.1.8</version>
     <name>ezrfs daemon</name>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.18</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <version>3.4.4</version>
+        <relativePath/>
     </parent>
 
     <dependencies>
@@ -21,14 +21,14 @@
         <dependency>
             <groupId>com.iconiux</groupId>
             <artifactId>ezlfs</artifactId>
-            <version>251214.0.2</version>
+            <version>251215.1.0</version>
         </dependency>
 
         <!-- lombok-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.12</version>
+            <version>1.18.42</version>
             <scope>provided</scope>
         </dependency>
 
@@ -36,7 +36,7 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.7.30</version>
+            <version>2.0.17</version>
         </dependency>
         <!--        <dependency>-->
         <!--            <groupId>org.slf4j</groupId>-->
@@ -58,48 +58,60 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.cloud</groupId>-->
+<!--            <artifactId>spring-cloud-openfeign-core</artifactId>-->
+<!--            <version>3.0.7</version>-->
+<!--        </dependency>-->
+
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.cloud</groupId>-->
+<!--            <artifactId>spring-cloud-starter-openfeign</artifactId>-->
+<!--            <version>3.1.0</version>-->
+<!--&lt;!&ndash;            <version>3.0.7</version>&ndash;&gt;-->
+<!--        </dependency>-->
+
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>32.0.1-android</version>
+            <version>33.4.8-jre</version>
         </dependency>
 
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>2.14.0</version>
+            <version>2.21.0</version>
         </dependency>
 
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.18.0</version>
+            <version>3.19.0</version>
         </dependency>
 
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-compress</artifactId>
-            <version>1.27.1</version>
+            <version>1.28.0</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <scope>test</scope>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.junit.jupiter</groupId>-->
+<!--            <artifactId>junit-jupiter</artifactId>-->
+<!--            <scope>test</scope>-->
+<!--        </dependency>-->
 
-        <dependency>
-            <groupId>org.assertj</groupId>
-            <artifactId>assertj-core</artifactId>
-            <scope>test</scope>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.assertj</groupId>-->
+<!--            <artifactId>assertj-core</artifactId>-->
+<!--            <scope>test</scope>-->
+<!--        </dependency>-->
 
-        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-collections4 -->
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-collections4</artifactId>
-            <version>4.1</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.apache.commons</groupId>-->
+<!--            <artifactId>commons-collections4</artifactId>-->
+<!--            <version>4.1</version>-->
+<!--        </dependency>-->
     </dependencies>
 
     <pluginRepositories>
@@ -114,7 +126,7 @@
     </pluginRepositories>
 
     <build>
-        <finalName>ezrfsd</finalName>
+        <finalName>ezrfs-daemon</finalName>
         <!--        <resources>-->
         <!--            <resource>-->
         <!--                <directory>src/main/resources</directory>-->
@@ -141,8 +153,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>21</source>
+                    <target>21</target>
                     <annotationProcessorPaths>
                         <!--                        <path>-->
                         <!--                            <groupId>org.mapstruct</groupId>-->
@@ -152,25 +164,45 @@
                         <path>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
-                            <version>1.18.12</version>
+                            <version>1.18.42</version>
                         </path>
                     </annotationProcessorPaths>
                 </configuration>
             </plugin>
-
         </plugins>
     </build>
 
-    <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-        <maven.compiler.jdk>8</maven.compiler.jdk>
-        <!--<maven.compiler.encoding>UTF-8</maven.compiler.encoding>-->
-        <!--<maven.test.skip>true</maven.test.skip>-->
-        <!--        <spring.boot.version>2.6.6</spring.boot.version>-->
+    <profiles>
+        <profile>
+            <id>native</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.graalvm.buildtools</groupId>
+                        <artifactId>native-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>build-native</id>
+                                <goals>
+                                    <goal>build</goal>
+                                </goals>
+                                <phase>package</phase>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
+    <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    </properties>
 
+        <maven.test.skip>true</maven.test.skip>
+        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+        <maven.compiler.source>24</maven.compiler.source>
+        <maven.compiler.target>24</maven.compiler.target>
+        <maven.compiler.jdk>24</maven.compiler.jdk>
+    </properties>
 </project>

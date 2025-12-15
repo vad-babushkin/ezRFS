@@ -1,0 +1,55 @@
+[Unit]
+Description=Easy remote file storage daemon
+StartLimitIntervalSec=0
+StartLimitBurst=10
+
+[Service]
+User=app
+#PIDFile=/var/run/ezrfsd/ezrfs.pid
+#Type=oneshot
+# The configuration file application.properties should be here:
+WorkingDirectory=/opt/ezrfs
+
+
+# Run ExecStartPre with root-permissions
+PermissionsStartOnly=true
+
+#ExecStartPre=/usr/bin/mkdir -p /opt/ezrfs
+#ExecStartPre=/usr/bin/mkdir -p /var/log/ezrfs
+#ExecStartPre=/usr/bin/chown -R app:syslog /opt/ezrfs
+#ExecStartPre=/usr/bin/chmod -R 775 /var/log/ezrfs
+#ExecStartPre=/usr/bin/sleep 30
+
+Environment="ENV=stage"
+
+ExecStart=/opt/ezrfs-daemon \
+-Dlogging.level.org.springframework=INFO \
+-Dlogging.level.com.iconiux.ezrfs.daemon=INFO \
+-Xms256m \
+-Xmx512m
+
+SuccessExitStatus=143
+StandardOutput=append:/var/log/ezrfs/ezrfsd.log
+StandardError=append:/var/log/ezrfs/ezrfsd.error.log
+
+KillSignal=SIGINT
+TimeoutStopSec=20
+Restart=always
+RestartSec=15
+
+LimitNOFILE=500000
+LimitNPROC=500000
+
+#https://www.freedesktop.org/software/systemd/man/systemd.exec.html#LimitCPU=
+#LimitCPU=, LimitFSIZE=, LimitDATA=, LimitSTACK=, LimitCORE=, LimitRSS=, LimitNOFILE=, LimitAS=, LimitNPROC=, LimitMEMLOCK=, LimitLOCKS=, LimitSIGPENDING=, LimitMSGQUEUE=, LimitNICE=, LimitRTPRIO=, LimitRTTIME=¶
+
+SyslogIdentifier=ezrfs
+
+[Install]
+WantedBy=multi-user.target
+
+
+# https://www.freedesktop.org/software/systemd/man/journalctl.html
+#check logs --- journalctl -u spring-mvc -f -o cat
+
+
