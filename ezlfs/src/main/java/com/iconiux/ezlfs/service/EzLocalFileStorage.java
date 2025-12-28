@@ -15,7 +15,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static com.iconiux.ezlfs.util.PathUtils.hashToPath;
+import static com.iconiux.ezlfs.util.PathUtils.cuidToPath;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 @Slf4j
@@ -61,31 +61,31 @@ public class EzLocalFileStorage implements IFileStorage {
 	}
 
 	/**
-	 * @param hash .
+	 * @param fileCuid .
 	 * @return .
 	 */
 	@Override
-	public Path getFilePath(String hash) throws IOException {
-		if (isBlank(hash)) {
+	public Path getFilePath(String fileCuid) throws IOException {
+		if (isBlank(fileCuid)) {
 			throw new IOException("fileId cannot be blank");
 		}
 
-		String filePath = basePath + hashToPath(hash);
+		String filePath = basePath + cuidToPath(fileCuid);
 
 		return Paths.get(filePath);
 	}
 
 	/**
-	 * @param hash .
+	 * @param fileCuid .
 	 * @return .
 	 */
 	@Override
-	public Path makeParentFilePath(String hash) throws IOException {
-		if (isBlank(hash)) {
-			throw new IOException("hash cannot be blank");
+	public Path makeParentFilePath(String fileCuid) throws IOException {
+		if (isBlank(fileCuid)) {
+			throw new IOException("fileCuid cannot be blank");
 		}
 
-		String filePath = basePath + hashToPath(hash);
+		String filePath = basePath + cuidToPath(fileCuid);
 		Path path = Paths.get(filePath);
 
 		if (!path.getParent().toFile().exists()) {
@@ -117,16 +117,16 @@ public class EzLocalFileStorage implements IFileStorage {
 	}
 
 	/**
-	 * @param hash .
+	 * @param fileCuid .
 	 * @return .
 	 */
 	@Override
-	public Boolean existFile(String hash) throws IOException {
-		if (isBlank(hash)) {
+	public Boolean existFile(String fileCuid) throws IOException {
+		if (isBlank(fileCuid)) {
 			throw new IOException("fileId cannot be blank");
 		}
 
-		String filePath = basePath + hashToPath(hash);
+		String filePath = basePath + cuidToPath(fileCuid);
 		Path path = Paths.get(filePath);
 
 		return path.toFile().exists();
@@ -150,7 +150,7 @@ public class EzLocalFileStorage implements IFileStorage {
 
 	@Override
 	public String saveMetadata(FileMetadata fileMetadata) throws IOException {
-		Path fileMetadataPath = getFileMetadataPath(fileMetadata.getFileHash());
+		Path fileMetadataPath = getFileMetadataPath(fileMetadata.getFileCuid());
 		makeParentFilePath(fileMetadataPath);
 
 		FileUtils.writeStringToFile(fileMetadataPath.toFile(), objectMapper.writeValueAsString(fileMetadata), StandardCharsets.UTF_8);
@@ -159,12 +159,12 @@ public class EzLocalFileStorage implements IFileStorage {
 	}
 
 	/**
-	 * @param hash .
+	 * @param fileCuid .
 	 * @return .
 	 */
 	@Override
-	public Path getFileMetadataPath(String hash) {
-		String fileMetadataPath = basePath + hashToPath(hash) + METADATA_FILE_EXT;
+	public Path getFileMetadataPath(String fileCuid) {
+		String fileMetadataPath = basePath + cuidToPath(fileCuid) + METADATA_FILE_EXT;
 
 		return Paths.get(fileMetadataPath);
 	}
@@ -177,28 +177,28 @@ public class EzLocalFileStorage implements IFileStorage {
 	 */
 	@Override
 	public String saveFile(FileMetadata fileMetadata, byte[] bytes) throws IOException {
-		Path filePath = getFilePath(fileMetadata.getFileHash());
+		Path filePath = getFilePath(fileMetadata.getFileCuid());
 
 		makeParentFilePath(filePath);
 
 		FileUtils.writeByteArrayToFile(filePath.toFile(), bytes);
 		saveMetadata(fileMetadata);
 
-		return fileMetadata.getFileHash();
+		return fileMetadata.getFileCuid();
 	}
 
 	/**
-	 * @param hash .
+	 * @param fileCuid .
 	 * @return .
 	 * @throws IOException .
 	 */
 	@Override
-	public byte[] getFileBody(String hash) throws IOException {
-		if (isBlank(hash)) {
+	public byte[] getFileBody(String fileCuid) throws IOException {
+		if (isBlank(fileCuid)) {
 			throw new IllegalArgumentException("fileId cannot be blank");
 		}
 
-		Path filePath = getFilePath(hash);
+		Path filePath = getFilePath(fileCuid);
 
 		if (!filePath.toFile().exists()) {
 			throw new FileNotFoundException();
@@ -208,13 +208,14 @@ public class EzLocalFileStorage implements IFileStorage {
 	}
 
 	/**
-	 * @param hash .
+	 *
+	 * @param fileCuid .
 	 * @return .
 	 * @throws IOException .
 	 */
 	@Override
-	public FileMetadata getFileMetadata(String hash) throws IOException {
-		Path fileMetadataPath = getFileMetadataPath(hash);
+	public FileMetadata getFileMetadata(String fileCuid) throws IOException {
+		Path fileMetadataPath = getFileMetadataPath(fileCuid);
 
 		FileMetadata fileMetadata = null;
 		if (fileMetadataPath.toFile().exists()) {
@@ -225,22 +226,22 @@ public class EzLocalFileStorage implements IFileStorage {
 	}
 
 	/**
-	 * @param hash .
+	 * @param fileCuid .
 	 * @return .
 	 * @throws IOException .
 	 */
 	@Override
-	public boolean delete(String hash) throws IOException {
-		if (isBlank(hash)) {
+	public boolean delete(String fileCuid) throws IOException {
+		if (isBlank(fileCuid)) {
 			throw new IllegalArgumentException("fileId cannot be blank");
 		}
 
-		Path filePath = getFilePath(hash);
+		Path filePath = getFilePath(fileCuid);
 
 		if (!filePath.toFile().exists()) {
 			throw new FileNotFoundException();
 		}
 
-		return FileUtils.deleteQuietly(getFilePath(hash).toFile());
+		return FileUtils.deleteQuietly(getFilePath(fileCuid).toFile());
 	}
 }

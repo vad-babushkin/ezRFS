@@ -1,0 +1,186 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Remote File Storage</title>
+    <!--    <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css"/>-->
+    <link rel="shortcut icon" th:href="@{/favicon.jpg}" type="image/png">
+    <style>
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            width: 50%;
+        }
+
+        body {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+
+            padding-left: 20px;
+            padding-right: 20px;
+            font: 20px Arial;
+            /*width: 50%;*/
+        }
+
+        /*h1 {*/
+        /*    color: #0000FF;*/
+        /*}*/
+
+        /*h2 {*/
+        /*    color: #FF0000;*/
+        /*}*/
+
+        .message {
+            color: #336699;
+            align: center;
+        }
+
+        .error {
+            color: #FF0000;
+            align: center;
+        }
+
+        .searcher {
+            /*background-color: ivory;*/
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+
+            border-radius: 10px;
+            padding: 1em;
+            width: 38%;
+        }
+
+        .searcher div {
+            /*border-radius: 5px;*/
+            margin: 2px;
+            /*padding: 1px;*/
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        table th, table td {
+            padding: 5px;
+        }
+
+        th {
+            font-size: 16px;
+            font-weight: bold;
+            color: #336699;
+            background-color: #F5F2C6;
+        }
+
+        tr:nth-child(even) {
+            background: aliceblue;
+        }
+
+        tr:nth-child(odd) {
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        /*. {*/
+        /*    width: 50%;*/
+        /*    !*padding: 12px;*!*/
+        /*    border: 1px solid darkgrey;*/
+        /*    border-radius: 4px;*/
+        /*    resize: vertical;*/
+        /*}*/
+
+        .result-table {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid darkgrey;
+            border-radius: 4px;
+            resize: vertical;
+        }
+
+        .result-td {
+            border: 1px solid darkgrey;
+        }
+
+        label {
+            padding: 12px 12px 12px 0;
+            display: inline-block;
+        }
+
+        .footer {
+            background-color: ivory;
+            clear: both;
+            font-size: 0.8em;
+            margin-top: 1.5em;
+            min-height: 1em;
+
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: center;
+            align-items: center;
+            width: 38%;
+
+            border-radius: 10px;
+            padding: 1em;
+        }
+
+        .sort-link {
+            color: #336699;
+            text-decoration: none;
+        }
+
+        .linkbar {
+            color: #336699;
+            /*background-color: ivory;*/
+            /*text-decoration: none;*/
+        }
+
+        .footer a {
+            color: #336699;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="footer"><b>ОБЛАЧНОЕ ХРАНИЛИЩЕ ФАЙЛОВ</b></div>
+
+<div style="width: 100%"></div>
+
+<div class="searcher">
+    <table>
+        <tr>
+            <td width="150px" height="150px">
+                <img alt="Logo" src="/favicon.jpg" th:src="@{/favicon.jpg}" title="Logo"/>
+            </td>
+            <td>
+                <div th:if="${isError}">
+                    <div class="message">
+                        <span>Ошибка при поиске файла</span>
+                    </div>
+                </div>
+
+                <div th:if="${notFound}">
+                    <div class="message">
+                        <span>Файл не найден</span>
+                    </div>
+                </div>
+
+                <div th:if="${isError ne true and notFound ne true }">
+                    <a class="linkbar" th:href="@{/api/v1/download/file/{fileCuid}(fileCuid=${fileCuid})}">Ссылка на
+                        скачку</a>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+<div style="width: 100%"></div>
+<div class="footer">ezRFS&nbsp;&copy;&nbsp;2025 iconiux</div>
+
+</body>
+</html>

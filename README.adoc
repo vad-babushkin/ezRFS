@@ -4,9 +4,19 @@ Extremely simple remote file storage.
 
 It is used for short-term storage of a file in a weak cloud VPS and accessible from the Internet.
 
-- include "easy local file storage (ezlfs) library"
+== Modules
+
+=== LFS
+
+Local File Storage
 
 - There is no database, everything is stored in the file system
+
+=== ezRFS
+
+Remote File Storage over LFS
+
+image::doc/icon/96/favicon.png[]
 
 - 2 operations: POST and GET
 
@@ -16,6 +26,34 @@ It is used for short-term storage of a file in a weak cloud VPS and accessible f
 
 - GraalVM native aware
 
-- JRE 8-24 verify (depends spring boot version)
+- JRE 21
 
 - files are automatically deleted by cron via linux find & rm
+
+=== ezRFS-Tray
+
+Java Swing tray application for manage uploaded files
+
+image::ezrfs-tray/doc/tray.png[ezrfs-tray]
+
+- add url
+
+- copy url
+
+- check url
+
+- clipboard listener
+
+- upload file
+
+- download file
+
+- JRE 21
+
+- Jpackage installer
+
+=== external tools
+
+bash, 7z, comm, jpackage,  find
+
+

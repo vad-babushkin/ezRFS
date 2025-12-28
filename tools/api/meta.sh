@@ -1,0 +1,1 @@
+curl -vvv http://localhost:8081/api/v1/download/meta/$1 -o $1

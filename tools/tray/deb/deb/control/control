@@ -1,0 +1,8 @@
+Package: ezrfs-tray
+Version: 251227.0.17
+Section: apps
+Priority: optional
+Architecture: all
+Depends: openjdk-21-jre
+Maintainer: iconiux <iconiux@gmail.com>
+Description: Tray GUI manager for Remote file storage (ezRFS)

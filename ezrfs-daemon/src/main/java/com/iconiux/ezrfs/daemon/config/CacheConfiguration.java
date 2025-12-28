@@ -12,7 +12,7 @@ import java.util.concurrent.locks.ReentrantLock;
 @Configuration
 public class CacheConfiguration {
 	@Bean
-	public LoadingCache<String, ReentrantLock> fileHashCache() {
+	public LoadingCache<String, ReentrantLock> fileCuidCache() {
 		return CacheBuilder.newBuilder().expireAfterAccess(10, TimeUnit.MINUTES).build(new CacheLoader<String, ReentrantLock>() {
 			@Override
 			public ReentrantLock load(String key) {

@@ -1,0 +1,1 @@
+curl -vvv http://localhost:8081/api/v1/alive

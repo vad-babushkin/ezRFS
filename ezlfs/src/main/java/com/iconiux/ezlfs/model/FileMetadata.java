@@ -10,7 +10,8 @@ import java.io.Serializable;
 public class FileMetadata implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private String fileHash;
+	private String fileCuid;
+//	private String fileHash;
 	private String fileMimeType;
 //	private String contentEncoding;
 	private String fileContentType;

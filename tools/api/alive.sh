@@ -1,0 +1,1 @@
+curl -vvv http://example.com/api/v1/view/alive

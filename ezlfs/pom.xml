@@ -6,7 +6,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.iconiux</groupId>
     <artifactId>ezlfs</artifactId>
-    <version>251215.1.1</version>
+    <version>251216.1.2</version>
     <name>easy local file storage</name>
 
     <dependencies>
@@ -124,8 +124,8 @@
 
         <maven.test.skip>true</maven.test.skip>
         <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
-        <maven.compiler.source>24</maven.compiler.source>
-        <maven.compiler.target>24</maven.compiler.target>
-        <maven.compiler.jdk>24</maven.compiler.jdk>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <maven.compiler.jdk>1.21</maven.compiler.jdk>
     </properties>
 </project>

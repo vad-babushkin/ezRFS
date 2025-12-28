@@ -7,33 +7,33 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 public class PathUtils {
 	/**
 	 *
-	 * @param hash .
+	 * @param fileCuid .
 	 * @return .
 	 */
-	public static  String hashToPath(String hash) {
-		String s = hash;
+	public static  String cuidToPath(String fileCuid) {
+		String s = fileCuid;
 		if (isBlank(s)) {
 			return "";
 		}
 		String path = "";
 
 		if (s.length() < 3) {
-			return path + "___" + File.separator + hash;
+			return path + "___" + File.separator + fileCuid;
 		}
 		path = path + s.substring(0, 3) + File.separator;
 		s = s.substring(3);
 
 		if (s.length() < 3) {
-			return path + "___" + File.separator + hash;
+			return path + "___" + File.separator + fileCuid;
 		}
 		path = path + s.substring(0, 3) + File.separator;
 		s = s.substring(3);
 
 		if (s.length() < 3) {
-			return path + "___" + File.separator + hash;
+			return path + "___" + File.separator + fileCuid;
 		}
 		path = path + s.substring(0, 3) + File.separator;
 
-		return path  + hash;
+		return path  + fileCuid;
 	}
 }

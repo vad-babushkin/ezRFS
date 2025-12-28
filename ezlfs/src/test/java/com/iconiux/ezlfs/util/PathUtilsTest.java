@@ -15,39 +15,39 @@ class PathUtilsTest {
 
 	@org.junit.jupiter.api.Test
 	void hashToPathTest() {
-		String path = PathUtils.hashToPath(s1);
+		String path = PathUtils.cuidToPath(s1);
 		System.out.println(path);
 		Assertions.assertThat(path).isNotBlank();
 
-		path = PathUtils.hashToPath(s2);
+		path = PathUtils.cuidToPath(s2);
 		System.out.println(path);
 		Assertions.assertThat(path).isNotBlank();
 
-		path = PathUtils.hashToPath(s3);
+		path = PathUtils.cuidToPath(s3);
 		System.out.println(path);
 		Assertions.assertThat(path).isNotBlank();
 
-		path = PathUtils.hashToPath(s4);
+		path = PathUtils.cuidToPath(s4);
 		System.out.println(path);
 		Assertions.assertThat(path).isNotBlank();
 
-		path = PathUtils.hashToPath(s5);
+		path = PathUtils.cuidToPath(s5);
 		System.out.println(path);
 		Assertions.assertThat(path).isNotBlank();
 
-		path = PathUtils.hashToPath(s6);
+		path = PathUtils.cuidToPath(s6);
 		System.out.println(path);
 		Assertions.assertThat(path).isNotBlank();
 
-		path = PathUtils.hashToPath(s7);
+		path = PathUtils.cuidToPath(s7);
 		System.out.println(path);
 		Assertions.assertThat(path).isNotBlank();
 
-		path = PathUtils.hashToPath(s8);
+		path = PathUtils.cuidToPath(s8);
 		System.out.println(path);
 		Assertions.assertThat(path).isNotBlank();
 
-		path = PathUtils.hashToPath(s9);
+		path = PathUtils.cuidToPath(s9);
 		System.out.println(path);
 		Assertions.assertThat(path).isNotBlank();
 	}

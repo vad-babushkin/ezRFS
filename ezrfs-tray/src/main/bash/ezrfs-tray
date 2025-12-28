@@ -1,0 +1,4 @@
+#!/bin/bash
+
+java -jar /opt/ezrfs-tray/ezrfs-tray-jar-with-dependencies.jar "$@"
+#>> /opt/ezrfs/ezrfs-tray.log 2>&1

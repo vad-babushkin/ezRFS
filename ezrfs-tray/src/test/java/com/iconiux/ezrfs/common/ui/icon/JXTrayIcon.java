@@ -1,0 +1,136 @@
+package com.iconiux.ezrfs.common.ui.icon;
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.geom.Ellipse2D;
+import java.awt.image.BufferedImage;
+
+import javax.swing.JDialog;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
+import javax.swing.SwingUtilities;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
+
+public class JXTrayIcon extends TrayIcon {
+
+	private JPopupMenu menu;
+	private static JDialog dialog;
+
+	static {
+		dialog = new JDialog((Frame) null, "TrayDialog");
+		dialog.setUndecorated(true);
+		dialog.setAlwaysOnTop(true);
+	}
+
+	private static PopupMenuListener popupListener = new PopupMenuListener() {
+		@Override
+		public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+			SwingUtilities.invokeLater(new Runnable() {
+				@Override
+				public void run() {
+					dialog.setVisible(false);
+				}
+			});
+		}
+
+		@Override
+		public void popupMenuCanceled(PopupMenuEvent e) {
+			SwingUtilities.invokeLater(new Runnable() {
+				@Override
+				public void run() {
+					dialog.setVisible(false);
+				}
+			});
+		}
+		@Override
+		public void popupMenuWillBecomeVisible(PopupMenuEvent e) {}
+	};
+
+	public JXTrayIcon(Image image) {
+		super(image);
+		addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				showJPopupMenu(e);
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				showJPopupMenu(e);
+			}
+		});
+	}
+
+	private void showJPopupMenu(MouseEvent e) {
+		if (e.isPopupTrigger() && menu != null) {
+			Dimension size = menu.getPreferredSize();
+			dialog.setBounds(e.getX(), e.getY(), size.width, size.height);
+			//dialog.setLocation(e.getX(), e.getY() - size.height);
+			dialog.setVisible(true);
+			menu.show(dialog.getContentPane(), 0, 0);
+			dialog.toFront();
+		}
+	}
+
+	public JPopupMenu getJPopuMenu() {
+		return menu;
+	}
+
+	public void setJPopuMenu(JPopupMenu menu) {
+		if (this.menu != null) {
+			this.menu.removePopupMenuListener(popupListener);
+		}
+		this.menu = menu;
+		menu.addPopupMenuListener(popupListener);
+	}
+
+	public static void createGui() {
+		JXTrayIcon tray = new JXTrayIcon(createImage());
+		tray.setJPopuMenu(createJPopupMenu());
+		try {
+			SystemTray.getSystemTray().add(tray);
+		} catch (AWTException e) {
+			e.printStackTrace();
+		}
+	}
+
+	static Image createImage() {
+		BufferedImage i = new BufferedImage(32, 32, BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g2 = (Graphics2D) i.getGraphics();
+		g2.setColor(Color.RED);
+		g2.fill(new Ellipse2D.Float(0, 0, i.getWidth(), i.getHeight()));
+		g2.dispose();
+		return i;
+	}
+
+	static JPopupMenu createJPopupMenu() {
+		final JPopupMenu m = new JPopupMenu();
+		m.add(new JMenuItem("Item 1"));
+		m.add(new JMenuItem("Item 2"));
+		JMenu submenu = new JMenu("Submenu");
+		submenu.add(new JMenuItem("item 1"));
+		submenu.add(new JMenuItem("item 2"));
+		submenu.add(new JMenuItem("item 3"));
+		submenu.add(new JMenuItem("item 4"));
+		submenu.add(new JMenuItem("item 5"));
+		submenu.add(new JMenuItem("item 6"));
+		submenu.add(new JMenuItem("item 7"));
+		submenu.add(new JMenuItem("item 8"));
+		submenu.add(new JMenuItem("item 9"));
+		m.add(submenu);
+		JMenuItem exitItem = new JMenuItem("Exit");
+		exitItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		m.add(exitItem);
+		return m;
+	}
+}
+

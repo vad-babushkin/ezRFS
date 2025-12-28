@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="17.0.12" class="java.beans.XMLDecoder">
+ <object class="com.jformdesigner.model.FormModel">
+  <void property="contentType">
+   <string>form/swing</string>
+  </void>
+  <void property="root">
+   <object class="com.jformdesigner.model.FormRoot">
+    <void method="add">
+     <object class="com.jformdesigner.model.FormWindow">
+      <string>org.jdesktop.swingx.JXFrame</string>
+      <object class="com.jformdesigner.model.FormLayoutManager">
+       <class>java.awt.BorderLayout</class>
+      </object>
+      <void method="setProperty">
+       <string>$locationPolicy</string>
+       <int>1</int>
+      </void>
+      <void method="setProperty">
+       <string>title</string>
+       <string>Облачное хранилище</string>
+      </void>
+      <void method="setProperty">
+       <string>iconImage</string>
+       <object class="com.jformdesigner.model.SwingIcon">
+        <int>0</int>
+        <string>/img/48x48/x-collection-shadow/cloud.png</string>
+       </object>
+      </void>
+      <void method="setProperty">
+       <string>startPosition</string>
+       <object class="java.lang.Enum" method="valueOf">
+        <class>org.jdesktop.swingx.JXFrame$StartPosition</class>
+        <string>CenterInScreen</string>
+       </object>
+      </void>
+      <void method="setProperty">
+       <string>font</string>
+       <object class="java.awt.Font">
+        <string>Dialog</string>
+        <int>0</int>
+        <int>12</int>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormContainer">
+        <string>com.jgoodies.uif_lite.panel.SimpleInternalFrame</string>
+        <object class="com.jformdesigner.model.FormLayoutManager">
+         <class>java.awt.BorderLayout</class>
+        </object>
+        <void method="setProperty">
+         <string>frameIcon</string>
+         <object class="com.jformdesigner.model.SwingIcon">
+          <int>0</int>
+          <string>/img/32x32/x-collection-shadow/history.png</string>
+         </object>
+        </void>
+        <void method="setProperty">
+         <string>toolBar</string>
+         <object class="com.jformdesigner.model.FormReference">
+          <string>operationToolBar</string>
+         </object>
+        </void>
+        <void property="name">
+         <string>simpleInternalFrame1</string>
+        </void>
+        <void method="add">
+         <object class="com.jformdesigner.model.FormContainer">
+          <string>javax.swing.JScrollPane</string>
+          <object class="com.jformdesigner.model.FormLayoutManager">
+           <class>javax.swing.JScrollPane</class>
+          </object>
+          <void property="name">
+           <string>searchResultScrollPane</string>
+          </void>
+          <void method="add">
+           <object class="com.jformdesigner.model.FormComponent">
+            <string>org.jdesktop.swingx.JXTable</string>
+            <void method="setProperty">
+             <string>autoResizeMode</string>
+             <int>4</int>
+            </void>
+            <void method="setProperty">
+             <string>columnControlVisible</string>
+             <boolean>true</boolean>
+            </void>
+            <void method="setProperty">
+             <string>editable</string>
+             <boolean>false</boolean>
+            </void>
+            <void method="setProperty">
+             <string>selectionMode</string>
+             <int>0</int>
+            </void>
+            <void property="name">
+             <string>storageItemsTable</string>
+            </void>
+           </object>
+          </void>
+         </object>
+         <object class="com.jformdesigner.model.FormLayoutConstraints">
+          <class>java.lang.String</class>
+          <void method="setProperty">
+           <string>value</string>
+           <string>Center</string>
+          </void>
+         </object>
+        </void>
+        <void method="add">
+         <object class="com.jformdesigner.model.FormComponent">
+          <string>com.iconiux.ezrfs.tray.ui.statusbar.SmartStatusBar</string>
+          <void property="name">
+           <string>smartStatusBar</string>
+          </void>
+         </object>
+         <object class="com.jformdesigner.model.FormLayoutConstraints">
+          <class>java.lang.String</class>
+          <void method="setProperty">
+           <string>value</string>
+           <string>South</string>
+          </void>
+         </object>
+        </void>
+       </object>
+       <object class="com.jformdesigner.model.FormLayoutConstraints">
+        <class>java.lang.String</class>
+        <void method="setProperty">
+         <string>value</string>
+         <string>Center</string>
+        </void>
+       </object>
+      </void>
+      <void property="name">
+       <string>this</string>
+      </void>
+     </object>
+     <object class="com.jformdesigner.model.FormLayoutConstraints">
+      <null/>
+      <void method="setProperty">
+       <string>location</string>
+       <object class="java.awt.Point">
+        <int>5</int>
+        <int>0</int>
+       </object>
+      </void>
+      <void method="setProperty">
+       <string>size</string>
+       <object class="java.awt.Dimension">
+        <int>970</int>
+        <int>775</int>
+       </object>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.jformdesigner.model.FormContainer">
+      <string>javax.swing.JToolBar</string>
+      <object class="com.jformdesigner.model.FormLayoutManager">
+       <class>javax.swing.JToolBar</class>
+      </object>
+      <void property="name">
+       <string>operationToolBar</string>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>com.jgoodies.uif.component.ToolBarButton</string>
+        <void method="setProperty">
+         <string>icon</string>
+         <object class="com.jformdesigner.model.SwingIcon">
+          <int>0</int>
+          <string>/img/32x32/x-collection-shadow/link_add.png</string>
+         </object>
+        </void>
+        <void method="setProperty">
+         <string>toolTipText</string>
+         <string>Добавить адрес файла</string>
+        </void>
+        <void property="name">
+         <string>addUrlButton</string>
+        </void>
+        <void method="addEvent">
+         <object class="com.jformdesigner.model.FormEvent">
+          <string>java.awt.event.ActionListener</string>
+          <string>actionPerformed</string>
+          <string>addUrlAction</string>
+          <boolean>true</boolean>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>com.jgoodies.uif.component.ToolBarToggleButton</string>
+        <void method="setProperty">
+         <string>icon</string>
+         <object class="com.jformdesigner.model.SwingIcon">
+          <int>0</int>
+          <string>/img/32x32/x-collection-shadow/spy.png</string>
+         </object>
+        </void>
+        <void method="setProperty">
+         <string>toolTipText</string>
+         <string>Включить слежение за буфером обмена</string>
+        </void>
+        <void property="name">
+         <string>clipboardSpyButton</string>
+        </void>
+        <void method="addEvent">
+         <object class="com.jformdesigner.model.FormEvent">
+          <string>java.awt.event.ItemListener</string>
+          <string>itemStateChanged</string>
+          <string>clipboardSpyButtonItemStateChanged</string>
+          <boolean>true</boolean>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JToolBar$Separator</string>
+        <void property="name">
+         <string>separator2</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>org.jdesktop.swingx.JXButton</string>
+        <void method="setProperty">
+         <string>icon</string>
+         <object class="com.jformdesigner.model.SwingIcon">
+          <int>0</int>
+          <string>/img/32x32/x-collection-shadow/copy.png</string>
+         </object>
+        </void>
+        <void method="setProperty">
+         <string>enabled</string>
+         <boolean>false</boolean>
+        </void>
+        <void method="setProperty">
+         <string>toolTipText</string>
+         <string>Копировать адрес страницы файла в буфер обмена</string>
+        </void>
+        <void property="name">
+         <string>copyUrlToClipboardButton</string>
+        </void>
+        <void method="addEvent">
+         <object class="com.jformdesigner.model.FormEvent">
+          <string>java.awt.event.ActionListener</string>
+          <string>actionPerformed</string>
+          <string>copyUrlToClipboardAction</string>
+          <boolean>true</boolean>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>org.jdesktop.swingx.JXButton</string>
+        <void method="setProperty">
+         <string>icon</string>
+         <object class="com.jformdesigner.model.SwingIcon">
+          <int>0</int>
+          <string>/img/32x32/x-collection-shadow/checks.png</string>
+         </object>
+        </void>
+        <void method="setProperty">
+         <string>toolTipText</string>
+         <string>Проверить существование файлов в облаке</string>
+        </void>
+        <void property="name">
+         <string>checkAvailableButton</string>
+        </void>
+        <void method="addEvent">
+         <object class="com.jformdesigner.model.FormEvent">
+          <string>java.awt.event.ActionListener</string>
+          <string>actionPerformed</string>
+          <string>checkAvailableAction</string>
+          <boolean>true</boolean>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JToolBar$Separator</string>
+        <void property="name">
+         <string>separator1</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>org.jdesktop.swingx.JXButton</string>
+        <void method="setProperty">
+         <string>icon</string>
+         <object class="com.jformdesigner.model.SwingIcon">
+          <int>0</int>
+          <string>/img/32x32/x-collection-shadow/upload.png</string>
+         </object>
+        </void>
+        <void method="setProperty">
+         <string>toolTipText</string>
+         <string>Выгрузить файл в облачное хранилище</string>
+        </void>
+        <void property="name">
+         <string>uploadButton</string>
+        </void>
+        <void method="addEvent">
+         <object class="com.jformdesigner.model.FormEvent">
+          <string>java.awt.event.ActionListener</string>
+          <string>actionPerformed</string>
+          <string>uploadAction</string>
+          <boolean>true</boolean>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JButton</string>
+        <void method="setProperty">
+         <string>icon</string>
+         <object class="com.jformdesigner.model.SwingIcon">
+          <int>0</int>
+          <string>/img/32x32/business/Download.png</string>
+         </object>
+        </void>
+        <void method="setProperty">
+         <string>enabled</string>
+         <boolean>false</boolean>
+        </void>
+        <void method="setProperty">
+         <string>toolTipText</string>
+         <string>Загрузить файл на компьютер</string>
+        </void>
+        <void property="name">
+         <string>downloadButton</string>
+        </void>
+        <void method="addEvent">
+         <object class="com.jformdesigner.model.FormEvent">
+          <string>java.awt.event.ActionListener</string>
+          <string>actionPerformed</string>
+          <string>downloadAction</string>
+          <boolean>true</boolean>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JButton</string>
+        <void method="setProperty">
+         <string>icon</string>
+         <object class="com.jformdesigner.model.SwingIcon">
+          <int>0</int>
+          <string>/img/32x32/x-collection-shadow/nav_right_green.png</string>
+         </object>
+        </void>
+        <void method="setProperty">
+         <string>enabled</string>
+         <boolean>false</boolean>
+        </void>
+        <void method="setProperty">
+         <string>toolTipText</string>
+         <string>Перейти на страницу файла</string>
+        </void>
+        <void property="name">
+         <string>gotoWebPageButton</string>
+        </void>
+        <void method="addEvent">
+         <object class="com.jformdesigner.model.FormEvent">
+          <string>java.awt.event.ActionListener</string>
+          <string>actionPerformed</string>
+          <string>gotoWebPageAction</string>
+          <boolean>true</boolean>
+         </object>
+        </void>
+       </object>
+      </void>
+     </object>
+     <object class="com.jformdesigner.model.FormLayoutConstraints">
+      <null/>
+      <void method="setProperty">
+       <string>location</string>
+       <object class="java.awt.Point">
+        <int>0</int>
+        <int>791</int>
+       </object>
+      </void>
+     </object>
+    </void>
+   </object>
+  </void>
+ </object>
+</java>

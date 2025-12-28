@@ -7,27 +7,27 @@ import java.nio.file.Path;
 
 public interface IFileStorage {
 	/**
-	 * @param hash .
+	 * @param fileCuid .
 	 * @return .
 	 * @throws IOException .
 	 */
-	Path getFilePath(String hash) throws IOException;
+	Path getFilePath(String fileCuid) throws IOException;
 
 	/**
-	 * @param hash .
+	 * @param fileCuid .
 	 * @return .
 	 * @throws IOException .
 	 */
-	Path makeParentFilePath(String hash) throws IOException;
+	Path makeParentFilePath(String fileCuid) throws IOException;
 
 	Path makeParentFilePath(Path path) throws IOException;
 
 	/**
-	 * @param hash .
+	 * @param fileCuid .
 	 * @return .
 	 * @throws IOException .
 	 */
-	Boolean existFile(String hash) throws IOException;
+	Boolean existFile(String fileCuid) throws IOException;
 
 //	/**
 //	 * @param bytes .
@@ -42,7 +42,7 @@ public interface IFileStorage {
 	 */
 	String saveMetadata(FileMetadata fileMetadata) throws IOException;
 
-	Path getFileMetadataPath(String hash);
+	Path getFileMetadataPath(String fileCuid);
 
 	/**
 	 * @param fileMetadata .
@@ -53,23 +53,23 @@ public interface IFileStorage {
 	String saveFile(FileMetadata fileMetadata, byte[] bytes) throws IOException;
 
 	/**
-	 * @param hash .
+	 * @param fileCuid .
 	 * @return .
 	 * @throws IOException .
 	 */
-	byte[] getFileBody(String hash) throws IOException;
+	byte[] getFileBody(String fileCuid) throws IOException;
 
 	/**
-	 * @param hash .
+	 * @param fileCuid .
 	 * @return .
 	 * @throws IOException .
 	 */
-	FileMetadata getFileMetadata(String hash) throws IOException;
+	FileMetadata getFileMetadata(String fileCuid) throws IOException;
 
 	/**
-	 * @param hash .
+	 * @param fileCuid .
 	 * @return .
 	 * @throws IOException .
 	 */
-	boolean delete(String hash) throws IOException;
+	boolean delete(String fileCuid) throws IOException;
 }

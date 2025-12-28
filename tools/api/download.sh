@@ -1,1 +1,1 @@
-curl -vvv http://localhost:8081/api/v1/download/$1 -o $1
+curl -vvv http://localhost:8081/api/v1/download/file/$1 -o $1
